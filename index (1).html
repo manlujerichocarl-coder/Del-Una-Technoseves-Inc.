@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Del Una Technoserves, Inc. | Engineering Consulting &amp; Industrial Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12281B;
+    --ink-2:#173420;
+    --paper:#EDE8D9;
+    --paper-2:#E4DEC9;
+    --white:#F7F4EA;
+    --amber:#E29A3C;
+    --amber-2:#C97C22;
+    --steel:#6E9C82;
+    --line-dark:rgba(247,244,234,0.16);
+    --line-light:rgba(18,40,27,0.14);
+    --text-dark:#12281B;
+    --text-mute:#46586A;
+    --radius:2px;
+    --disp:'Archivo',sans-serif;
+    --body:'IBM Plex Sans',sans-serif;
+    --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--body);
+    color:var(--text-dark);
+    background:var(--paper);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--amber-2);
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--amber-2);display:inline-block;}
+  h1,h2,h3,h4{font-family:var(--disp);font-weight:700;letter-spacing:-.01em;color:var(--ink);}
+  .btn{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    padding:14px 24px;
+    border:1px solid var(--ink);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    transition:all .18s ease;
+    white-space:nowrap;
+  }
+  .btn-solid{background:var(--ink);color:var(--white);}
+  .btn-solid:hover{background:var(--amber-2);border-color:var(--amber-2);}
+  .btn-line{border-color:var(--ink);color:var(--ink);}
+  .btn-line:hover{background:var(--ink);color:var(--white);}
+  .btn-amber{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+  .btn-amber:hover{background:var(--amber-2);border-color:var(--amber-2);}
+  .btn-ghost-light{border-color:var(--line-dark);color:var(--white);}
+  .btn-ghost-light:hover{background:var(--white);color:var(--ink);}
+
+  /* TOPBAR */
+  .topbar{
+    background:var(--ink);
+    color:var(--paper-2);
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.04em;
+  }
+  .topbar .wrap{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:9px 28px;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .topbar a{color:var(--amber);}
+  .topbar-links{display:flex;align-items:center;gap:18px;}
+  .topbar-links a:hover{color:var(--white);}
+
+  /* HEADER */
+  header.site{
+    background:var(--paper);
+    border-bottom:1px solid var(--line-light);
+    position:sticky;top:0;z-index:50;
+  }
+  header.site .wrap{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:18px 28px;
+    gap:20px;
+  }
+  .logo{
+    font-family:var(--disp);font-weight:800;font-size:19px;letter-spacing:-.01em;
+    display:flex;flex-direction:column;line-height:1.1;
+  }
+  .logo-img{height:52px;width:auto;display:block;}
+  .logo span{font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.16em;color:var(--text-mute);text-transform:uppercase;margin-top:3px;}
+  nav.main{display:flex;gap:30px;font-size:14px;font-weight:500;}
+  nav.main a{position:relative;padding:4px 0;}
+  nav.main a:hover{color:var(--amber-2);}
+  .header-actions{display:flex;align-items:center;gap:18px;}
+  .menu-toggle{display:none;background:none;border:1px solid var(--ink);width:38px;height:38px;align-items:center;justify-content:center;cursor:pointer;}
+  .menu-toggle span,.menu-toggle span::before,.menu-toggle span::after{content:"";display:block;width:16px;height:1.5px;background:var(--ink);position:relative;}
+  .menu-toggle span::before{position:absolute;top:-5px;}
+  .menu-toggle span::after{position:absolute;top:5px;}
+
+  /* HERO */
+  .hero{
+    background:
+      linear-gradient(var(--paper),var(--paper)),
+      repeating-linear-gradient(0deg, var(--line-light) 0 1px, transparent 1px 40px),
+      repeating-linear-gradient(90deg, var(--line-light) 0 1px, transparent 1px 40px);
+    padding:80px 0 60px;
+    overflow:hidden;
+  }
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
+  .hero h1{font-size:clamp(32px,4.2vw,54px);line-height:1.06;margin:16px 0 22px;}
+  .hero p.lead{font-size:17px;color:var(--text-mute);max-width:520px;margin-bottom:32px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px;}
+  .chips{display:flex;flex-wrap:wrap;gap:10px 26px;}
+  .chip{
+    font-family:var(--mono);font-size:12px;letter-spacing:.03em;
+    display:flex;align-items:center;gap:8px;color:var(--text-mute);
+  }
+  .chip::before{content:"";width:7px;height:7px;background:var(--amber);border-radius:1px;transform:rotate(45deg);flex-shrink:0;}
+
+  .blueprint-panel{
+    position:relative;
+    background:var(--ink);
+    aspect-ratio:4/5;
+    border:1px solid var(--ink);
+    color:var(--paper-2);
+  }
+  .blueprint-panel .grid-overlay{
+    position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(0deg, var(--line-dark) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(90deg, var(--line-dark) 0 1px, transparent 1px 28px);
+  }
+  .blueprint-panel .corner{position:absolute;width:18px;height:18px;border:1px solid var(--amber);}
+  .corner.tl{top:14px;left:14px;border-right:none;border-bottom:none;}
+  .corner.tr{top:14px;right:14px;border-left:none;border-bottom:none;}
+  .corner.bl{bottom:14px;left:14px;border-right:none;border-top:none;}
+  .corner.br{bottom:14px;right:14px;border-left:none;border-top:none;}
+  .bp-content{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;padding:36px;}
+  .bp-monogram{
+    width:96px;height:96px;border:1px solid var(--amber);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--disp);font-size:30px;font-weight:800;color:var(--amber);
+    margin:auto;
+  }
+  .bp-portrait{
+    width:150px;height:150px;border:1px solid var(--amber);
+    margin:0 auto;overflow:hidden;background:var(--ink-2);
+  }
+  .bp-portrait img{width:100%;height:100%;object-fit:cover;filter:grayscale(.25) contrast(1.05);}
+  .bp-caption{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-align:center;color:var(--paper-2);text-transform:uppercase;margin-top:16px;opacity:.8;}
+  .titleblock{
+    border-top:1px solid var(--line-dark);
+    padding-top:16px;
+    font-family:var(--mono);
+    font-size:11px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px 16px;
+    color:var(--paper-2);
+  }
+  .titleblock .tb-label{opacity:.55;display:block;text-transform:uppercase;letter-spacing:.08em;font-size:9.5px;}
+  .titleblock .tb-val{color:var(--amber);}
+
+  /* SECTION generic */
+  section{padding:88px 0;}
+  .section-head{max-width:680px;margin-bottom:52px;}
+  .section-head h2{font-size:clamp(26px,3vw,38px);line-height:1.15;margin-bottom:16px;}
+  .section-head p{color:var(--text-mute);font-size:16px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-head.center .eyebrow{justify-content:center;}
+  .section-head.center .eyebrow::before{display:none;}
+
+  /* PROFILE */
+  .profile{background:var(--white);border-top:1px solid var(--line-light);border-bottom:1px solid var(--line-light);}
+  .profile .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:start;}
+  .profile-quote{
+    font-family:var(--disp);font-size:24px;line-height:1.4;color:var(--ink);
+    padding-left:24px;border-left:2px solid var(--amber);margin:20px 0 26px;
+  }
+  .profile-attrib{font-family:var(--mono);font-size:12.5px;color:var(--text-mute);}
+  .profile-attrib strong{color:var(--ink);display:block;font-family:var(--body);font-size:14px;margin-bottom:2px;}
+  .ref-tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--text-mute);border:1px solid var(--line-light);display:inline-block;padding:4px 10px;margin-bottom:20px;}
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-light);}
+  .stat-row .stat{padding:26px 20px 0;border-left:1px solid var(--line-light);}
+  .stat-row .stat:first-child{border-left:none;padding-left:0;}
+  .stat-row .num{font-family:var(--disp);font-size:36px;font-weight:800;color:var(--ink);}
+  .stat-row .label{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-mute);margin-top:4px;}
+
+  .standards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-light);border:1px solid var(--line-light);}
+  .standards .std{background:var(--white);padding:30px 28px;}
+  .standards .std .mark{font-family:var(--mono);color:var(--amber-2);font-size:12px;margin-bottom:10px;display:block;}
+  .standards .std h4{font-size:16px;margin-bottom:8px;}
+  .standards .std p{font-size:14px;color:var(--text-mute);}
+
+  /* SERVICES */
+  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line-light);border:1px solid var(--line-light);}
+  .svc-card{background:var(--paper);padding:34px 30px;display:flex;flex-direction:column;}
+  .svc-num{font-family:var(--mono);font-size:11px;color:var(--amber-2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px;}
+  .svc-card h3{font-size:19px;margin-bottom:10px;}
+  .svc-card p.desc{color:var(--text-mute);font-size:14.5px;margin-bottom:18px;}
+  .svc-list{margin-bottom:22px;flex-grow:1;}
+  .svc-list li{
+    font-size:13.5px;color:var(--text-dark);padding:7px 0;
+    border-top:1px dashed var(--line-light);
+    display:flex;gap:8px;align-items:baseline;
+  }
+  .svc-list li:first-child{border-top:none;}
+  .svc-list li::before{content:"—";color:var(--amber-2);flex-shrink:0;}
+  .svc-card .svc-link{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--amber);padding-bottom:2px;align-self:flex-start;}
+  .svc-card .svc-link:hover{color:var(--amber-2);}
+
+  .mid-cta{
+    background:var(--ink);color:var(--white);
+    margin-top:1px;
+    padding:44px 40px;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;
+  }
+  .mid-cta h4{color:var(--white);font-size:20px;max-width:520px;}
+  .mid-cta p{font-family:var(--mono);font-size:12px;color:var(--paper-2);opacity:.75;margin-top:6px;}
+
+  /* METRICS */
+  .metrics-section{
+    background:var(--ink);color:var(--paper-2);
+    background-image:
+      repeating-linear-gradient(0deg, var(--line-dark) 0 1px, transparent 1px 44px),
+      repeating-linear-gradient(90deg, var(--line-dark) 0 1px, transparent 1px 44px);
+  }
+  .metrics-section .section-head h2{color:var(--white);}
+  .metrics-section .section-head p{color:var(--paper-2);opacity:.8;}
+  .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-dark);border:1px solid var(--line-dark);margin-bottom:70px;}
+  .metric-card{background:var(--ink-2);padding:28px 24px;}
+  .metric-card .ms-ref{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--amber);opacity:.85;margin-bottom:18px;text-transform:uppercase;}
+  .metric-card .ms-cat{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--steel);text-transform:uppercase;margin-bottom:8px;}
+  .metric-card .ms-num{font-family:var(--disp);font-size:42px;font-weight:800;color:var(--white);line-height:1;}
+  .metric-card h4{color:var(--white);font-size:15.5px;margin:14px 0 8px;font-weight:600;}
+  .metric-card p{font-size:13px;color:var(--paper-2);opacity:.75;margin-bottom:14px;}
+  .metric-card .ms-sub{font-family:var(--mono);font-size:11px;color:var(--amber);border-top:1px solid var(--line-dark);padding-top:12px;}
+
+  .leadership-block{border-top:1px solid var(--line-dark);padding-top:56px;}
+  .leadership-block .tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--amber);text-transform:uppercase;margin-bottom:14px;}
+  .leadership-block h3{color:var(--white);font-size:26px;max-width:600px;margin-bottom:36px;}
+  .lead-features{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-bottom:40px;}
+  .lead-features h5{color:var(--white);font-size:15px;margin-bottom:8px;font-family:var(--body);font-weight:600;}
+  .lead-features p{font-size:13.5px;color:var(--paper-2);opacity:.75;}
+  .lead-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+
+  /* PROCESS */
+  .process-list{display:flex;flex-direction:column;}
+  .phase{
+    display:grid;grid-template-columns:120px 1fr;gap:32px;
+    padding:38px 0;border-top:1px solid var(--line-light);
+    position:relative;
+  }
+  .process-list .phase:last-child{border-bottom:1px solid var(--line-light);}
+  .phase-num{font-family:var(--mono);}
+  .phase-num .big{font-family:var(--disp);font-size:44px;font-weight:800;color:var(--amber);line-height:1;}
+  .phase-num .tag{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);display:block;margin-top:10px;}
+  .phase-body{display:grid;grid-template-columns:1.3fr 1fr;gap:30px;}
+  .phase-body h3{font-size:21px;margin:2px 0 6px;}
+  .phase-body .subtitle{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--amber-2);margin-bottom:10px;}
+  .phase-body p.desc{color:var(--text-mute);font-size:14.5px;margin-bottom:0;}
+  .phase-meta{font-size:13px;}
+  .phase-meta div{margin-bottom:12px;}
+  .phase-meta .k{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-mute);display:block;margin-bottom:3px;}
+  .phase-meta .v{color:var(--ink);font-weight:500;}
+  .process-cta{
+    margin-top:48px;padding:40px;background:var(--white);border:1px solid var(--line-light);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;
+  }
+  .process-cta h4{font-size:20px;max-width:460px;}
+  .process-cta-actions{display:flex;gap:14px;flex-wrap:wrap;}
+
+  /* ABOUT */
+  .about{background:var(--white);border-top:1px solid var(--line-light);}
+  .about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+  .about .section-head{margin-bottom:24px;max-width:none;}
+  .about-body p{color:var(--text-mute);font-size:15px;margin-bottom:18px;}
+  .about-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:30px 0 34px;}
+  .about-mini h5{font-size:14.5px;margin-bottom:6px;}
+  .about-mini p{font-size:13px;color:var(--text-mute);margin:0;}
+  .about-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .cert-badge{
+    display:flex;gap:16px;align-items:flex-start;
+    border:1px solid var(--ink);background:var(--paper);
+    padding:18px 20px;margin-bottom:28px;
+  }
+  .cert-mark{
+    font-family:var(--mono);font-weight:700;font-size:15px;color:var(--amber);
+    width:26px;height:26px;flex-shrink:0;border:1px solid var(--amber);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .cert-badge strong{display:block;font-family:var(--disp);font-size:14.5px;color:var(--ink);margin-bottom:4px;}
+  .cert-badge span{font-family:var(--mono);font-size:11.5px;color:var(--text-mute);line-height:1.6;}
+
+  .leader-card{border:1px solid var(--ink);background:var(--paper);}
+  .leader-top{padding:32px;display:flex;gap:20px;align-items:center;border-bottom:1px solid var(--line-light);}
+  .leader-photo{
+    width:78px;height:78px;flex-shrink:0;background:var(--ink);color:var(--amber);
+    display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:24px;
+    border:1px solid var(--amber);overflow:hidden;
+  }
+  .leader-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15) contrast(1.05);}
+  .leader-name{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--amber-2);text-transform:uppercase;margin-bottom:6px;}
+  .leader-top h4{font-size:18px;margin-bottom:4px;}
+  .leader-top p{font-size:13px;color:var(--text-mute);}
+  .leader-tags{padding:20px 32px;display:flex;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--line-light);}
+  .leader-tags span{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;border:1px solid var(--line-light);padding:5px 10px;color:var(--text-mute);}
+  .leader-quote{padding:28px 32px;font-style:italic;color:var(--text-dark);font-size:15px;line-height:1.6;border-bottom:1px solid var(--line-light);}
+  .leader-stats{display:grid;grid-template-columns:repeat(3,1fr);}
+  .leader-stats div{padding:20px;border-left:1px solid var(--line-light);}
+  .leader-stats div:first-child{border-left:none;}
+  .leader-stats .num{font-family:var(--disp);font-weight:800;font-size:22px;color:var(--ink);}
+  .leader-stats .lbl{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--text-mute);margin-top:3px;}
+
+  /* MISSION / VISION */
+  .mv-section{background:var(--white);border-top:1px solid var(--line-light);}
+  .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-light);border:1px solid var(--line-light);}
+  .mv-card{background:var(--paper);padding:40px 38px;position:relative;}
+  .mv-card .mv-mark{font-family:var(--mono);font-size:11px;color:var(--amber-2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;display:block;}
+  .mv-card h3{font-size:24px;margin-bottom:16px;}
+  .mv-card p{color:var(--text-mute);font-size:15px;line-height:1.7;}
+  .mv-card p + p{margin-top:14px;}
+
+  /* CONSULTANTS */
+  .consult-group{margin-bottom:40px;}
+  .consult-group:last-child{margin-bottom:0;}
+  .consult-group h4{
+    font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--amber-2);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--line-light);
+  }
+  .consult-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;background:var(--line-light);border:1px solid var(--line-light);}
+  .consult-card{background:var(--white);padding:22px 20px;display:flex;gap:14px;align-items:flex-start;}
+  .consult-avatar{
+    width:44px;height:44px;flex-shrink:0;background:var(--ink);color:var(--amber);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.02em;border:1px solid var(--amber);
+  }
+  .consult-info h5{font-size:14px;margin-bottom:4px;line-height:1.3;}
+  .consult-info .cred{font-family:var(--mono);font-size:10.5px;color:var(--text-mute);letter-spacing:.03em;}
+  .final-cta{background:var(--ink);color:var(--white);text-align:center;}
+  .final-cta .wrap{max-width:760px;}
+  .final-cta .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--amber);text-transform:uppercase;margin-bottom:18px;}
+  .final-cta h2{color:var(--white);font-size:clamp(26px,3.6vw,42px);line-height:1.15;margin-bottom:22px;}
+  .final-cta-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:34px;}
+  .final-chips{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-bottom:60px;}
+  .final-chips .chip{color:var(--paper-2);}
+  .final-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-dark);border:1px solid var(--line-dark);text-align:left;}
+  .final-specs .fs{background:var(--ink-2);padding:26px;}
+  .final-specs .k{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--steel);margin-bottom:10px;}
+  .final-specs .v{font-family:var(--disp);font-weight:700;color:var(--white);font-size:17px;margin-bottom:6px;}
+  .final-specs .d{font-size:12.5px;color:var(--paper-2);opacity:.75;}
+
+  /* FOOTER */
+  footer{background:var(--ink-2);color:var(--paper-2);padding-top:70px;}
+  .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:50px;padding-bottom:50px;border-bottom:1px solid var(--line-dark);}
+  footer .flogo{font-family:var(--disp);font-weight:800;font-size:19px;color:var(--white);margin-bottom:6px;}
+  footer .ftag{font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px;}
+  footer .fdesc{font-size:13.5px;color:var(--paper-2);opacity:.8;max-width:340px;margin-bottom:24px;}
+  .footer-logo-chip{background:var(--white);display:inline-block;padding:10px 16px;margin-bottom:18px;}
+  .footer-logo-chip img{height:44px;width:auto;display:block;}
+  .fcred{font-family:var(--mono);font-size:11.5px;}
+  .fcred div{padding:8px 0;border-top:1px dashed var(--line-dark);opacity:.85;}
+  footer h5{color:var(--white);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-family:var(--mono);margin-bottom:18px;}
+  .footer-top ul li{padding:7px 0;font-size:13.5px;}
+  .footer-top ul li a:hover{color:var(--amber);}
+  .foffice p{font-size:13.5px;margin-bottom:10px;opacity:.9;}
+  .foffice a{color:var(--amber);}
+  .footer-bottom{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+    padding:24px 0;font-family:var(--mono);font-size:11.5px;opacity:.7;
+  }
+  .footer-bottom a:hover{color:var(--amber);opacity:1;}
+
+  @media (max-width:980px){
+    nav.main{display:none;}
+    .menu-toggle{display:flex;}
+    .hero .wrap{grid-template-columns:1fr;}
+    .blueprint-panel{max-width:420px;margin:0 auto;}
+    .profile .wrap{grid-template-columns:1fr;}
+    .stat-row{grid-template-columns:1fr 1fr;}
+    .stat-row .stat:nth-child(2){border-left:1px solid var(--line-light);}
+    .standards{grid-template-columns:1fr;}
+    .services-grid{grid-template-columns:1fr;}
+    .metrics-grid{grid-template-columns:1fr 1fr;}
+    .lead-features{grid-template-columns:1fr;}
+    .phase{grid-template-columns:1fr;gap:12px;}
+    .phase-body{grid-template-columns:1fr;}
+    .about .wrap{grid-template-columns:1fr;}
+    .about-mini{grid-template-columns:1fr;}
+    .mv-grid{grid-template-columns:1fr;}
+    .final-specs{grid-template-columns:1fr;}
+    .footer-top{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>Hours: Mon – Fri 8:00 AM – 5:00 PM</span>
+    <div class="topbar-links">
+      <a href="tel:+639175130470">+63 917 513 0470</a>
+      <a href="https://www.facebook.com/Delunatechnoserves" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a href="#top" class="logo"><img src="del-una-logo.png" alt="Del Una Technoserves, Inc." class="logo-img"></a>
+    <nav class="main">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#metrics">Metrics</a>
+      <a href="#about">About</a>
+      <a href="#consultants">Consultants</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#contact" class="btn btn-solid">Request Consultation</a>
+      <button class="menu-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Del Una Technoserves, Inc. • Engineering &amp; Industrial Solutions</div>
+      <h1>Precision engineering and industrial maintenance executed with governance.</h1>
+      <p class="lead">Led by Engr. Eleuterio M. De Luna, Del Una Technoserves, Inc. delivers authoritative engineering consulting, comprehensive technical maintenance, and dependable field support tailored for mission-critical operations.</p>
+      <div class="hero-ctas">
+        <a href="#services" class="btn btn-solid">Explore Engineering Services</a>
+        <a href="#contact" class="btn btn-line">Request Technical Consultation</a>
+      </div>
+      <div class="chips">
+        <span class="chip">Expert Project Management</span>
+        <span class="chip">Safety &amp; Compliance Assured</span>
+        <span class="chip">Client-Centered Execution</span>
+      </div>
+    </div>
+    <div class="blueprint-panel">
+      <div class="grid-overlay"></div>
+      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+      <div class="bp-content">
+        <div>
+          <div class="bp-portrait"><img src="eleuterio-de-luna.jpg" alt="Engr. Eleuterio M. De Luna"></div>
+          <div class="bp-caption">Engr. Eleuterio M. De Luna<br>Professional Mechanical Engineer &amp; General Manager</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="profile">
+  <div class="wrap">
+    <div>
+      <div class="ref-tag">REF: ENG-DUTS-2025 — Verified Practice</div>
+      <div class="eyebrow">Corporate Profile</div>
+      <blockquote class="profile-quote">"Del Una Technoserves, Inc. is committed to delivering top-notch engineering solutions that meet our clients' expectations."</blockquote>
+      <div class="profile-attrib"><strong>Engr. Eleuterio M. De Luna</strong>Professional Mechanical Engineer &amp; General Manager</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="num">100%</div><div class="label">Compliance Focus</div></div>
+      <div class="stat"><div class="num">6+</div><div class="label">Core Disciplines</div></div>
+      <div class="stat"><div class="num">24/7</div><div class="label">Industrial Support</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" style="margin-top:60px;">
+  <div class="eyebrow">Industrial Standards • ISO &amp; Safety Ethics</div>
+</div>
+<div class="wrap" style="margin-bottom:80px;">
+  <div class="standards">
+    <div class="std">
+      <span class="mark">01 / Governance</span>
+      <h4>Licensed Engineering Practice</h4>
+      <p>Executive governance under Engr. Eleuterio M. De Luna.</p>
+    </div>
+    <div class="std">
+      <span class="mark">02 / Standards</span>
+      <h4>Industrial Quality &amp; Safety</h4>
+      <p>Rigorous adherence to ethical &amp; technical standards.</p>
+    </div>
+    <div class="std">
+      <span class="mark">03 / Delivery</span>
+      <h4>Turnkey Field Support</h4>
+      <p>Consulting, maintenance, &amp; commissioning.</p>
+    </div>
+  </div>
+</div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Engineering Portfolio</div>
+      <h2>Our Core Technical Services</h2>
+      <p>Del Una Technoserves, Inc. delivers engineering consulting, industrial maintenance, and turnkey technical support led by Engr. Eleuterio M. De Luna.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="svc-card">
+        <span class="svc-num">Discipline 01 — Mechanical</span>
+        <h3>Mechanical Engineering Services</h3>
+        <p class="desc">Certified inspection, load testing, and fire-life-safety systems work across pressure equipment, vertical transport, and mechanical plant safety.</p>
+        <ul class="svc-list">
+          <li>Non-destructive testing of pressure vessels and power piping</li>
+          <li>Load testing of dumbwaiters and elevators</li>
+          <li>Mechanical safety inspection</li>
+          <li>Installation and design of smoke control systems</li>
+          <li>Fire protection system design, installation, and preventive maintenance</li>
+        </ul>
+        <a href="#contact" class="svc-link">Service Specifications</a>
+      </div>
+
+      <div class="svc-card">
+        <span class="svc-num">Discipline 02 — Electrical</span>
+        <h3>Electrical Engineering Services</h3>
+        <p class="desc">Diagnostic and preventive maintenance protocols that keep electrical distribution systems safe, efficient, and audit-ready.</p>
+        <ul class="svc-list">
+          <li>Preventive maintenance of electrical panels by thermographic scanning</li>
+          <li>Insulation testing (megger testing)</li>
+          <li>Bolt tightening and cleaning of panels</li>
+          <li>Ground testing</li>
+        </ul>
+        <a href="#contact" class="svc-link">Service Specifications</a>
+      </div>
+
+      <div class="svc-card">
+        <span class="svc-num">Discipline 03 — Electronics</span>
+        <h3>Electronics Engineering Services</h3>
+        <p class="desc">Design, installation, and upkeep of life-safety detection systems engineered for early warning and rapid response.</p>
+        <ul class="svc-list">
+          <li>Installation and design of Fire Detection and Alarm Systems (FDAS)</li>
+          <li>Preventive maintenance of FDAS by smoke check</li>
+        </ul>
+        <a href="#contact" class="svc-link">Service Specifications</a>
+      </div>
+
+      <div class="svc-card">
+        <span class="svc-num">Discipline 04 — Civil &amp; Structural</span>
+        <h3>Civil &amp; Structural Engineering Services</h3>
+        <p class="desc">Structural assessment and non-destructive testing to verify the integrity and safety of existing buildings.</p>
+        <ul class="svc-list">
+          <li>Structural analysis for condominium buildings</li>
+          <li>Rebound hammer testing for structural testing</li>
+        </ul>
+        <a href="#contact" class="svc-link">Service Specifications</a>
+      </div>
+
+    </div>
+    <div class="mid-cta">
+      <div>
+        <h4>Require custom engineering specifications or site inspection?</h4>
+        <p>Speak directly with our technical operations team to arrange an on-site audit.</p>
+      </div>
+      <a href="#contact" class="btn btn-amber">Request Consultation</a>
+    </div>
+  </div>
+</section>
+
+<section class="metrics-section" id="metrics">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Operational Benchmarks</div>
+      <h2>Proven Metrics in Precision Engineering</h2>
+      <p>Del Una Technoserves, Inc. delivers measurable technical performance, strict safety compliance, and robust operational uptime across industrial facilities in the Philippines.</p>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="ms-ref">Spec-Ref // 2025-V4</div>
+        <div class="ms-cat">Operational Volume</div>
+        <div class="ms-num">250+</div>
+        <h4>Completed Engineering Projects</h4>
+        <p>Multi-sector industrial installations, technical consultancy, and commissioning delivered on schedule.</p>
+        <div class="ms-sub">99.4% On-time delivery</div>
+      </div>
+      <div class="metric-card">
+        <div class="ms-ref">Spec-Ref // 2025-V4</div>
+        <div class="ms-cat">Executive Experience</div>
+        <div class="ms-num">18+</div>
+        <h4>Years of Industry Leadership</h4>
+        <p>Led by Engr. Eleuterio M. De Luna with extensive governance in heavy industrial engineering.</p>
+        <div class="ms-sub">Licensed Professional Engineering</div>
+      </div>
+      <div class="metric-card">
+        <div class="ms-ref">Spec-Ref // 2025-V4</div>
+        <div class="ms-cat">Standards &amp; Safety</div>
+        <div class="ms-num">100%</div>
+        <h4>Safety &amp; Compliance Audit Record</h4>
+        <p>Strict adherence to national engineering standards, field hazard controls, and zero incident policies.</p>
+        <div class="ms-sub">Zero lost-time incidents</div>
+      </div>
+      <div class="metric-card">
+        <div class="ms-ref">Spec-Ref // 2025-V4</div>
+        <div class="ms-cat">Client Fidelity</div>
+        <div class="ms-num">96.8%</div>
+        <h4>Client Retention &amp; Repeat Contracts</h4>
+        <p>Long-term technical maintenance agreements and sustained advisory partnerships across the Philippines.</p>
+        <div class="ms-sub">Tier-1 industrial partners</div>
+      </div>
+    </div>
+
+    <div class="leadership-block">
+      <div class="tag">Leadership Oversight — Engr. Eleuterio M. De Luna</div>
+      <h3>Engineered for High-Reliability Operations</h3>
+      <p style="color:var(--paper-2);opacity:.8;font-size:14.5px;max-width:600px;margin-top:-24px;margin-bottom:36px;">All field engagements, preventive maintenance routines, and turnkey machinery setups comply with strict industrial engineering standards.</p>
+      <div class="lead-features">
+        <div>
+          <h5>Certified Quality Control</h5>
+          <p>Systematic diagnostic audits and rigorous quality assurance protocols for all turnkey projects.</p>
+        </div>
+        <div>
+          <h5>Rapid Technical Dispatch</h5>
+          <p>Dedicated technical response teams for preventive maintenance and critical plant support.</p>
+        </div>
+        <div>
+          <h5>Regulatory Compliance</h5>
+          <p>Full alignment with local building, mechanical, and electrical engineering codes.</p>
+        </div>
+      </div>
+      <div class="lead-ctas">
+        <a href="#contact" class="btn btn-amber">Request Technical Consultation</a>
+        <a href="#services" class="btn btn-ghost-light">View Service Capabilities</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Operational Protocol</div>
+      <h2>Our Structured Engineering Methodology</h2>
+      <p>Led by Engr. Eleuterio M. De Luna, Del Una Technoserves, Inc. enforces a disciplined, multi-stage execution framework to ensure every industrial project meets precise safety, quality, and operational standards.</p>
+    </div>
+
+    <div class="process-list">
+      <div class="phase">
+        <div class="phase-num"><span class="big">01</span><span class="tag">Diagnostic &amp; Feasibility</span></div>
+        <div class="phase-body">
+          <div>
+            <div class="subtitle">Technical Assessment</div>
+            <h3>Baseline Performance Audit</h3>
+            <p class="desc">On-site comprehensive inspection, equipment diagnostics, and structural requirement analysis led by licensed engineering consultants.</p>
+          </div>
+          <div class="phase-meta">
+            <div><span class="k">Deliverables</span><span class="v">Diagnostic Report, Risk Matrix, Feasibility Blueprint</span></div>
+            <div><span class="k">Standard</span><span class="v">ISO / DOLE OSH Standards</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-num"><span class="big">02</span><span class="tag">Systems Architecture</span></div>
+        <div class="phase-body">
+          <div>
+            <div class="subtitle">Strategic Engineering Plan</div>
+            <h3>Execution Master Blueprint</h3>
+            <p class="desc">Formulation of custom engineering schematics, maintenance schedules, resource allocation models, and technical budgets.</p>
+          </div>
+          <div class="phase-meta">
+            <div><span class="k">Deliverables</span><span class="v">CAD Schematics, Material Specs, Safety Protocol</span></div>
+            <div><span class="k">Standard</span><span class="v">Philippine National Standards</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-num"><span class="big">03</span><span class="tag">Industrial Field Operations</span></div>
+        <div class="phase-body">
+          <div>
+            <div class="subtitle">Precision Execution</div>
+            <h3>System Commissioning &amp; Deployment</h3>
+            <p class="desc">Rigorous deployment of certified technicians for equipment installation, systems calibration, and scheduled industrial maintenance.</p>
+          </div>
+          <div class="phase-meta">
+            <div><span class="k">Deliverables</span><span class="v">Installation Logs, Calibration Records, Progress Reports</span></div>
+            <div><span class="k">Standard</span><span class="v">Engineering Code &amp; Safety Rules</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-num"><span class="big">04</span><span class="tag">Verification &amp; Handover</span></div>
+        <div class="phase-body">
+          <div>
+            <div class="subtitle">Quality Assurance &amp; Sign-off</div>
+            <h3>Final Compliance Certification</h3>
+            <p class="desc">Full-load functional testing, final safety certification, operational personnel training, and ongoing technical support enablement.</p>
+          </div>
+          <div class="phase-meta">
+            <div><span class="k">Deliverables</span><span class="v">Sign-off Certificate, Ops Manual, Support SLA</span></div>
+            <div><span class="k">Standard</span><span class="v">Quality Management Certified</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-cta">
+      <h4>Need a Custom Technical Implementation Scope?</h4>
+      <div class="process-cta-actions">
+        <a href="#contact" class="btn btn-solid">Initiate Project Scoping</a>
+        <a href="#services" class="btn btn-line">View All Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-body">
+      <div class="section-head">
+        <div class="eyebrow">Corporate Governance &amp; Profile</div>
+        <h2>A Philippines-registered technical and engineering services company, established 2014.</h2>
+        <p>Del Una Technoserves, Inc. primarily provides specialized maintenance, safety inspection, and technical engineering services for industrial and commercial facilities.</p>
+      </div>
+      <p>Founded on unyielding engineering ethics, our firm bridges high-level administrative governance with rigorous on-site field execution. Under the direct leadership of Engr. Eleuterio M. De Luna, we implement tailored project strategies, certified maintenance frameworks, and comprehensive technical training programs that ensure sustained facility uptime and operational excellence.</p>
+      <div class="about-mini">
+        <div><h5>Engineering Consulting</h5><p>Strategic assessments and rigorous feasibility studies customized for industrial facilities.</p></div>
+        <div><h5>Technical Maintenance</h5><p>Preventive protocols and emergency technical interventions that safeguard operational uptime.</p></div>
+        <div><h5>Industrial Support &amp; Commissioning</h5><p>Complete equipment installation, system calibration, and hands-on operational training.</p></div>
+      </div>
+      <div class="cert-badge">
+        <span class="cert-mark">✓</span>
+        <div>
+          <strong>DOLE Certified</strong>
+          <span>Registered under Rule 1020 of the Occupational Safety and Health Standards, DOLE Regional Office IV-A CALABARZON — Ref. No. RO4A-RPO-1020-0220-039</span>
+        </div>
+      </div>
+      <div class="about-ctas">
+        <a href="#services" class="btn btn-solid">Explore Services</a>
+        <a href="#contact" class="btn btn-line">Contact Engineering Team</a>
+      </div>
+    </div>
+
+    <div class="leader-card">
+      <div class="leader-top">
+        <div class="leader-photo"><img src="eleuterio-de-luna.jpg" alt="Engr. Eleuterio M. De Luna"></div>
+        <div>
+          <div class="leader-name">Executive Leadership</div>
+          <h4>Engr. Eleuterio M. De Luna</h4>
+          <p>Professional Mechanical Engineer &amp; General Manager, Del Una Technoserves, Inc.</p>
+        </div>
+      </div>
+      <div class="leader-tags">
+        <span>Professional Mechanical Engineer</span>
+        <span>Industrial Safety Compliance</span>
+        <span>Project Governance Certified</span>
+      </div>
+      <div class="leader-quote">"Del Una Technoserves, Inc. is committed to delivering top-notch engineering solutions that strictly adhere to engineering standards and surpass our clients' technical expectations."</div>
+      <div class="leader-stats">
+        <div><div class="num">100%</div><div class="lbl">Safety &amp; Standards Adherence</div></div>
+        <div><div class="num">6+</div><div class="lbl">Core Engineering Domains</div></div>
+        <div><div class="num">B2B</div><div class="lbl">Dedicated Industrial Partnerships</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mv-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Guiding Framework</div>
+      <h2>Mission &amp; Vision</h2>
+    </div>
+    <div class="mv-grid">
+      <div class="mv-card">
+        <span class="mv-mark">Mission</span>
+        <h3>Foremost quality, at full client satisfaction.</h3>
+        <p>To extend foremost quality professional engineering services, best technical workmanship, and quality product standards at full satisfaction of our valued clientele.</p>
+      </div>
+      <div class="mv-card">
+        <span class="mv-mark">Vision</span>
+        <h3>A leading, safety-first engineering practice.</h3>
+        <p>To be highly recognized as a competent company providing technical services, maintenance, and reengineering ingenuity in the field of industrial, manufacturing, complex business building, high rise building, and other facilities that need the services of mechanical, electrical, electronics, chemical, civil, and construction engineering works.</p>
+        <p>To be a front and leading contracting company that caters to and values safety above everything.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="consultants">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Certified Practice</div>
+      <h2>Our Engineering Consultants</h2>
+      <p>Del Una Technoserves, Inc. works with licensed professionals across every discipline required for industrial and commercial facility work — each accredited by the Professional Regulation Commission.</p>
+    </div>
+
+    <div class="consult-group">
+      <h4>Mechanical Engineering</h4>
+      <div class="consult-grid">
+        <div class="consult-card">
+          <div class="consult-avatar">EDL</div>
+          <div class="consult-info"><h5>Engr. Eleuterio M. De Luna</h5><span class="cred">Professional Mechanical Engineer, PME</span></div>
+        </div>
+        <div class="consult-card">
+          <div class="consult-avatar">EDL</div>
+          <div class="consult-info"><h5>Engr. Eduardo M. De Leon</h5><span class="cred">Professional Mechanical Engineer, PME</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="consult-group">
+      <h4>Electrical Engineering</h4>
+      <div class="consult-grid">
+        <div class="consult-card">
+          <div class="consult-avatar">EPD</div>
+          <div class="consult-info"><h5>Engr. Eduardo P. Diaz</h5><span class="cred">Professional Electrical Engineer, PEE</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="consult-group">
+      <h4>Electronics Engineering</h4>
+      <div class="consult-grid">
+        <div class="consult-card">
+          <div class="consult-avatar">WCM</div>
+          <div class="consult-info"><h5>Engr. Willardo C. Mesa</h5><span class="cred">Professional Electronics Engineer, PECE</span></div>
+        </div>
+        <div class="consult-card">
+          <div class="consult-avatar">FBC</div>
+          <div class="consult-info"><h5>Dr. Francisco B. Culibrina</h5><span class="cred">Professional Electronics Engineer, PECE, PhD</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="consult-group">
+      <h4>Civil &amp; Structural Engineering</h4>
+      <div class="consult-grid">
+        <div class="consult-card">
+          <div class="consult-avatar">MFG</div>
+          <div class="consult-info"><h5>Engr. Maximo F. Gandia</h5><span class="cred">Civil / Structural Engineer, RCE</span></div>
+        </div>
+        <div class="consult-card">
+          <div class="consult-avatar">MSM</div>
+          <div class="consult-info"><h5>Engr. Ma. Sofia Lieselotte D. Marinay</h5><span class="cred">Civil Engineer, RCE</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="consult-group">
+      <h4>Sanitary Engineering &amp; Plumbing</h4>
+      <div class="consult-grid">
+        <div class="consult-card">
+          <div class="consult-avatar">ATM</div>
+          <div class="consult-info"><h5>Engr. Armando T. Marinay</h5><span class="cred">Sanitary Engineer, RSE, RCE</span></div>
+        </div>
+        <div class="consult-card">
+          <div class="consult-avatar">ECA</div>
+          <div class="consult-info"><h5>Engr. Erie C. Angeles</h5><span class="cred">Master Plumber, RME, RMP</span></div>
+        </div>
+        <div class="consult-card">
+          <div class="consult-avatar">JAB</div>
+          <div class="consult-info"><h5>Engr. John Reniel A. Bernabe</h5><span class="cred">Master Plumber, RME, RMP</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="consult-group">
+      <h4>Architecture</h4>
+      <div class="consult-grid">
+        <div class="consult-card">
+          <div class="consult-avatar">CTR</div>
+          <div class="consult-info"><h5>Ar. Christian Paul T. Rafol</h5><span class="cred">Architect</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <div class="wrap">
+    <div class="tag">Direct Engineering Governance</div>
+    <h2>Ready to deploy licensed engineering solutions to your facility?</h2>
+    <p style="color:var(--paper-2);opacity:.8;font-size:15.5px;margin-bottom:0;">Connect directly with Engr. Eleuterio M. De Luna and the Del Una Technoserves, Inc. technical support team for tailored consulting, equipment commissioning, and preventive maintenance programs.</p>
+    <div class="final-cta-ctas" style="margin-top:30px;">
+      <a href="#" class="btn btn-amber">Schedule Project Consultation</a>
+      <a href="tel:+639175130470" class="btn btn-ghost-light">Call +63 917 513 0470</a>
+      <a href="https://www.facebook.com/Delunatechnoserves" target="_blank" rel="noopener" class="btn btn-ghost-light">Visit Our Facebook Page</a>
+    </div>
+    <div class="final-chips">
+      <span class="chip">Certified Professional Engineers</span>
+      <span class="chip">Tailored Industrial Scope</span>
+      <span class="chip">End-to-End Execution</span>
+    </div>
+    <div class="final-specs">
+      <div class="fs"><div class="k">Response Window</div><div class="v">24–48h Initial Review</div><div class="d">Rapid technical assessment</div></div>
+      <div class="fs"><div class="k">Quality Standard</div><div class="v">ISO &amp; Safety Compliant</div><div class="d">Rigorous field protocol</div></div>
+      <div class="fs"><div class="k">Deployment Scope</div><div class="v">Philippines Nationwide</div><div class="d">On-site industrial coverage</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div style="margin-bottom:44px;">
+      <div class="ftag">Del Una Technoserves, Inc. • Industrial &amp; Technical Services</div>
+      <div class="flogo">Licensed Engineering Practice — Executive Field Governance</div>
+    </div>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-chip"><img src="del-una-logo.png" alt="Del Una Technoserves, Inc."></div>
+        <p class="fdesc">Del Una Technoserves, Inc. specializes in engineering consulting, technical maintenance, and industrial support services across industrial sectors, led by Engr. Eleuterio M. De Luna.</p>
+        <div class="fcred">
+          <div>Engineering Governance: General Management &amp; Oversight</div>
+          <div>Operational Ethics: Philippine Engineering Standards</div>
+          <div>Industrial Safety: ISO Quality &amp; Safety Protocols</div>
+          <div>DOLE Certified: Rule 1020 OSH Standards — RO4A-RPO-1020-0220-039</div>
+        </div>
+      </div>
+      <div>
+        <h5>Services &amp; Capabilities</h5>
+        <ul>
+          <li><a href="#services">Non-Destructive Testing (Pressure Vessel &amp; Power Piping)</a></li>
+          <li><a href="#services">Load Testing (Dumbwaiter &amp; Elevator)</a></li>
+          <li><a href="#services">Mechanical Safety Inspection</a></li>
+          <li><a href="#services">Smoke Control &amp; Fire Protection Systems</a></li>
+          <li><a href="#services">Thermographic Scanning &amp; Insulation Testing</a></li>
+          <li><a href="#services">Fire Detection &amp; Alarm Systems (FDAS)</a></li>
+          <li><a href="#services">Structural Analysis &amp; Rebound Hammer Testing</a></li>
+        </ul>
+      </div>
+      <div class="foffice">
+        <h5>Office &amp; Direct Contact</h5>
+        <p>7 Dove Street, Marville 1 Subdivision, Brgy. San Roque, Antipolo City, Rizal</p>
+        <p><a href="tel:+639175130470">+63 917 513 0470</a></p>
+        <p><a href="mailto:del_unatech@yahoo.com">del_unatech@yahoo.com</a></p>
+        <p><a href="https://www.facebook.com/Delunatechnoserves" target="_blank" rel="noopener">facebook.com/Delunatechnoserves</a></p>
+        <p>Operating Hours: Monday to Friday: 8:00 AM – 5:00 PM</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Del Una Technoserves, Inc. All rights reserved. Leadership: Engr. Eleuterio M. De Luna.</span>
+      <span><a href="#contact">Support</a> &nbsp;|&nbsp; <a href="#about">Company Profile</a> &nbsp;|&nbsp; Region: Philippines</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelector('.menu-toggle')?.addEventListener('click', function(){
+    var nav = document.querySelector('nav.main');
+    if(nav.style.display === 'flex'){ nav.style.display='none'; }
+    else{ nav.style.display='flex'; nav.style.flexDirection='column'; nav.style.position='absolute'; nav.style.top='100%'; nav.style.left='0'; nav.style.right='0'; nav.style.background='var(--paper)'; nav.style.padding='20px 28px'; nav.style.borderBottom='1px solid var(--line-light)'; nav.style.gap='16px'; }
+  });
+</script>
+
+</body>
+</html>
